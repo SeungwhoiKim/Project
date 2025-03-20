@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public float rotationSpeed = 5.0f;
     public float interactionDistance = 2.5f;
     public float interactionAngle = 45.0f;
+    public float gravity = 9.81f;
 
     private CharacterController controller;
     private Camera mainCamera;
@@ -73,7 +74,17 @@ public class PlayerController : MonoBehaviour
         float moveX = Input.GetAxis("Horizontal");
         float moveZ = Input.GetAxis("Vertical");
 
-        Vector3 move = new Vector3(moveX, 0, moveZ).normalized;
+        Vector3 move = Vector3.zero;
+
+        if (controller.isGrounded)
+        {
+            move = new Vector3(moveX, 0, moveZ).normalized;
+        }
+        else
+        {
+            move.y -= gravity * Time.deltaTime;
+        }
+        
 
         if (move.magnitude >= 0.1f)
         {
