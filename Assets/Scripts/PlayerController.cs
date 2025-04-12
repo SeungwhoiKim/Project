@@ -36,13 +36,13 @@ public class PlayerController : MonoBehaviour
     void Interact()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, interactionDistance);
-        Interactable closestInteractable = null;
+        SquirrelCapture closestSquirrel = null;
         float closestDistance = Mathf.Infinity;
 
         foreach (Collider collider in colliders)
         {
-            Interactable interactable = collider.GetComponent<Interactable>();
-            if (interactable != null)
+            SquirrelCapture squirrel = collider.GetComponentInParent<SquirrelCapture>();
+            if (squirrel != null)
             {
                 Vector3 directionToObject = (collider.transform.position - transform.position).normalized;
                 float angle = Vector3.Angle(transform.forward, directionToObject);
@@ -52,19 +52,19 @@ public class PlayerController : MonoBehaviour
                     if (distance < closestDistance)
                     {
                         closestDistance = distance;
-                        closestInteractable = interactable;
+                        closestSquirrel = squirrel;
                     }
                 }
             }
         }
 
-        if (closestInteractable != null)
+        if (closestSquirrel != null)
         {
-            closestInteractable.Interact();
+            closestSquirrel.Interact();
         }
         else
         {
-            Debug.Log("Too far to interact.");
+            Debug.Log("No Squirrels nearby.");
         }
     }
 
