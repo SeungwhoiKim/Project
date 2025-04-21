@@ -101,9 +101,6 @@ PrefabInstance:
       addedObject: {fileID: 8482597656722791197}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: db4abd334b0041e42a5b146d854d444d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3605757794134194437}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: db4abd334b0041e42a5b146d854d444d, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 2708796114246691114}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: db4abd334b0041e42a5b146d854d444d, type: 3}
       insertIndex: -1
@@ -111,6 +108,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: db4abd334b0041e42a5b146d854d444d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1420110639301017870}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: db4abd334b0041e42a5b146d854d444d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -1771997596342419124}
     - targetCorrespondingSourceObject: {fileID: 8164078558771037576, guid: db4abd334b0041e42a5b146d854d444d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7693240175959287873}
@@ -134,30 +134,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 1
   rotationSpeed: 100
+  fleeSpeedMultiplier: 1.5
   minWalkDuration: 3
   maxWalkDuration: 6
   minIdleDuration: 2
   maxIdleDuration: 4
-  lookAroundDuringIdle: 1
---- !u!114 &3605757794134194437
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4300641673787111417}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db6cadddaf721b2418450d351d96223a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  viewDistance: 10
-  viewAngle: 90
-  player: {fileID: 0}
-  detectionMask:
+  fleeDuration: 4
+  detectionDistance: 5
+  detectionAngle: 60
+  eyeHeight: 1
+  viewMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  originOffset: {x: 0, y: 1, z: 0}
 --- !u!114 &2708796114246691114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,6 +191,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 742e2a4aa00c3a1428e5bc2e3cb4e273, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-1771997596342419124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4300641673787111417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac156bd31ddbe8044bac071e93714fdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalMaterial: {fileID: 2100000, guid: 75be45794f4c2a44e949e607a48e7350, type: 2}
+  highlightMaterial: {fileID: 2100000, guid: 28f74d31fd09b4e43ae5e29c90881d8b, type: 2}
+  checkInterval: 0.2
+  occlusionThreshold: 0.6
 --- !u!1 &5053946090558132000 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8164078558771037576, guid: db4abd334b0041e42a5b146d854d444d, type: 3}

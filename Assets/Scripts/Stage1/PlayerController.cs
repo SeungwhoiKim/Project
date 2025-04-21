@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour
     public float gravity = -9.81f;
     private float verticalVelocity = 0f;
 
+    [Header("Push Settings")]
+    public float pushPower = 2.0f;
+
     private CharacterController controller;
     private Camera mainCamera;
 
@@ -100,12 +103,34 @@ public class PlayerController : MonoBehaviour
     void RotateTowardsMouse()
     {
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
+
+        Plane groundPlane = new Plane(Vector3.up, transform.position);
+
+        if (groundPlane.Raycast(ray, out float enter))
         {
-            Vector3 lookDirection = hit.point - transform.position;
-            lookDirection.y = 0;
-            Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            Vector3 hitPoint = ray.GetPoint(enter);
+            Vector3 lookDirection = hitPoint - transform.position;
+            lookDirection.y = 0f;
+
+            if (lookDirection.sqrMagnitude > 0.001f)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
+                transform.rotation = Quaternion.Slerp(
+                    transform.rotation,
+                    targetRotation,
+                    rotationSpeed * Time.deltaTime
+                );
+            }
         }
+    }
+
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        Rigidbody body = hit.collider.attachedRigidbody;
+        if (body == null || body.isKinematic) return;
+
+        Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
+
+        body.linearVelocity = pushDir * pushPower;
     }
 }
