@@ -27,6 +27,12 @@ public class StageClearUI : MonoBehaviour
         }
     }
 
+    public void TriggerClear()
+    {
+        if (isShown) return;
+        ShowStageClear();
+    }
+
     void ShowStageClear()
     {
         isShown = true;
